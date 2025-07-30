@@ -1,0 +1,20 @@
+# Cloth Int Feet
+feet=interlopers_silken_striders,id=243305,ilevel=723
+
+# Leather Agi Feet
+feet=interlopers_reinforced_sandals,id=243306,ilevel=723
+
+# Leather Int Feet
+feet=interlopers_reinforced_sandals,id=243306,ilevel=723
+
+# Mail Agi Feet
+feet=interlopers_reinforced_sandals,id=243308,ilevel=723
+
+# Mail Int Feet
+feet=interlopers_reinforced_sandals,id=243308,ilevel=723
+
+# Plate Str Feet
+feet=interlopers_reinforced_sandals,id=243307,ilevel=723
+
+# Plate Int Feet
+feet=interlopers_reinforced_sandals,id=243307,ilevel=723
