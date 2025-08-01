@@ -139,7 +139,7 @@ def append_tier_set_bonuses(folder="simc_inputs"):
             blocks.append(f"profileset.\"{base_filename}_4pc\"+=set_bonus=name=thewarwithin_season_3,pc=4,hero_tree={hero_talent},enable=1")
             set_bonus_block = "\n".join(blocks)
             with open(filepath, "w", encoding="utf-8") as simc_file:
-                simc_file.write(content + whitespace + set_bonus_block + "\n")
+                simc_file.write("ptr=1\n" + content + whitespace + set_bonus_block + "\n")
             print(f"Appended tier set bonuses to: {filepath}")
 
 if __name__ == "__main__":
