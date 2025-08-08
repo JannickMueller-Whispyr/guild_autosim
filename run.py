@@ -27,6 +27,10 @@ def main():
     # Run cleanResults.py
     print("Running cleanResults.py...")
     subprocess.run(["python", "cleanResults.py"], check=True)
+    
+    # Run reshapeResults.py
+    print("Running reshapeResults.py...")
+    subprocess.run(["python", "reshapeResults.py"], check=True)
 
 if __name__ == "__main__":
     main()

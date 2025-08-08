@@ -72,14 +72,17 @@ def should_append(filename, comment):
 def format_copy_line(filename, comment):
     # Remove extension
     base_filename = os.path.splitext(filename)[0]
-    # Remove '#' and extra spaces, replace spaces with underscores, lowercase
-    x = comment.lstrip("#").strip().replace(" ", "_").lower()
+    # Remove '#' and extra spaces, replace special characters
+    x = comment.lstrip("#").strip()
+    x = x.replace(" ", "_")
+    x = x.replace("'", "")
+    x = x.replace("-", "")
+    x = x.lower()
     return f"profileset.\"{base_filename}_{x}\"+="
 
 def append_to_simc_files(txt_file, folder="simc_inputs"):
     pairs = parse_append_file(txt_file)
     whitespace = "\n" * 20
-    whitespace_with_ptr = whitespace + "\nptr=1\n"
 
     for filename in os.listdir(folder):
         if filename.endswith(".simc"):
@@ -103,7 +106,7 @@ def append_to_simc_files(txt_file, folder="simc_inputs"):
                     to_append.append(f"{copy_line}{line}")
             if to_append:
                 with open(filepath, "w", encoding="utf-8") as simc_file:
-                    simc_file.write(content + whitespace_with_ptr + "\n".join(to_append) + "\n")
+                    simc_file.write(content + "\n".join(to_append) + "\n")
                 print(f"Appended to: {filepath}")
 
 def append_tier_set_bonuses(folder="simc_inputs"):
@@ -128,18 +131,18 @@ def append_tier_set_bonuses(folder="simc_inputs"):
                 hero_talent = "unknown"
             blocks = []
             # 2+2
-            blocks.append(f"profileset.\"{base_filename}_2+2pc\"+=set_bonus=thewarwithin_season_2_2pc=1")
-            blocks.append(f"profileset.\"{base_filename}_2+2pc\"+=set_bonus=thewarwithin_season_2_4pc=0")
-            blocks.append(f"profileset.\"{base_filename}_2+2pc\"+=set_bonus=name=thewarwithin_season_3,pc=2,hero_tree={hero_talent},enable=1")
-            blocks.append(f"profileset.\"{base_filename}_2+2pc\"+=set_bonus=name=thewarwithin_season_3,pc=4,hero_tree={hero_talent},enable=0")
+            blocks.append(f"profileset.\"{base_filename}_2pc\"+=set_bonus=thewarwithin_season_2_2pc=1")
+            blocks.append(f"profileset.\"{base_filename}_2pc\"+=set_bonus+=/thewarwithin_season_2_4pc=0")
+            blocks.append(f"profileset.\"{base_filename}_2pc\"+=set_bonus+=/name=thewarwithin_season_3,pc=2,hero_tree={hero_talent},enable=1")
+            blocks.append(f"profileset.\"{base_filename}_2pc\"+=set_bonus+=/name=thewarwithin_season_3,pc=4,hero_tree={hero_talent},enable=0")
             # 4pc
             blocks.append(f"profileset.\"{base_filename}_4pc\"+=set_bonus=thewarwithin_season_2_2pc=0")
-            blocks.append(f"profileset.\"{base_filename}_4pc\"+=set_bonus=thewarwithin_season_2_4pc=0")
-            blocks.append(f"profileset.\"{base_filename}_4pc\"+=set_bonus=name=thewarwithin_season_3,pc=2,hero_tree={hero_talent},enable=1")
-            blocks.append(f"profileset.\"{base_filename}_4pc\"+=set_bonus=name=thewarwithin_season_3,pc=4,hero_tree={hero_talent},enable=1")
+            blocks.append(f"profileset.\"{base_filename}_4pc\"+=set_bonus+=/thewarwithin_season_2_4pc=0")
+            blocks.append(f"profileset.\"{base_filename}_4pc\"+=set_bonus+=/name=thewarwithin_season_3,pc=2,hero_tree={hero_talent},enable=1")
+            blocks.append(f"profileset.\"{base_filename}_4pc\"+=set_bonus+=/name=thewarwithin_season_3,pc=4,hero_tree={hero_talent},enable=1")
             set_bonus_block = "\n".join(blocks)
             with open(filepath, "w", encoding="utf-8") as simc_file:
-                simc_file.write("ptr=1\n" + content + whitespace + set_bonus_block + "\n")
+                simc_file.write(content + whitespace + set_bonus_block + "\n")
             print(f"Appended tier set bonuses to: {filepath}")
 
 if __name__ == "__main__":

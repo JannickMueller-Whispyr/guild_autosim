@@ -48,11 +48,18 @@ def extract_spec(addon_input):
 
 def get_active_hero_talent_name(id_active_hero_talent, id_hero_talent1, name_hero_talent1, id_hero_talent2, name_hero_talent2):
     if id_active_hero_talent == id_hero_talent1:
-        return name_hero_talent1
+        hero_talent = name_hero_talent1
     elif id_active_hero_talent == id_hero_talent2:
-        return name_hero_talent2
+        hero_talent = name_hero_talent2
     else:
-        return "unknown_hero_talent"
+        hero_talent = "unknown_hero_talent"
+    
+    # Apply same special character cleaning as in append.py
+    hero_talent = hero_talent.replace(" ", "_")
+    hero_talent = hero_talent.replace("'", "")
+    hero_talent = hero_talent.replace("-", "")
+    hero_talent = hero_talent.lower()
+    return hero_talent
 
 if __name__ == "__main__":
     print("Script started")
