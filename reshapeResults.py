@@ -26,13 +26,20 @@ def reshape_results():
                 dps = row[0]
                 class_name = row[1]
                 
-                # Find spec position
+                # Find spec position (handle beast_mastery special case)
                 spec = None
                 spec_index = -1
                 for i in range(2, len(row)):
                     if row[i].lower() in ALL_SPECS:
                         spec = row[i]
                         spec_index = i
+                        break
+                    # Special case for "beast mastery" split into two columns
+                    elif (i < len(row) - 1 and 
+                          row[i].lower() == "beast" and 
+                          row[i + 1].lower() == "mastery"):
+                        spec = "beast_mastery"
+                        spec_index = i + 1  # Use the index after "mastery"
                         break
                 
                 if spec is None:
