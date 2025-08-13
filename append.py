@@ -44,6 +44,7 @@ def parse_append_file(txt_file):
 def should_append(filename, comment):
     fname = filename.lower()
     comment = comment.lower()
+    
     # Armor type checks
     if "cloth" in comment:
         if not any(f"_{cls}_" in f"_{fname}_" for cls in CLOTH_CLASSES):
@@ -57,16 +58,37 @@ def should_append(filename, comment):
     if "plate" in comment:
         if not any(f"_{cls}_" in f"_{fname}_" for cls in PLATE_CLASSES):
             return False
-    # Stat type checks (same logic can be applied if needed)
-    if "int" in comment:
-        if not any(f"_{spec}_" in f"_{fname}_" for spec in INT_SPECS):
+    
+    # Stat type checks - need to match the correct class-spec combination
+    has_stat_requirement = any(stat in comment for stat in ["int", "agi", "str"])
+    if has_stat_requirement:
+        matches_stat = False
+        
+        # Check if this specific filename matches the stat requirement
+        if "int" in comment:
+            # Check if this character is an INT character (has INT class AND INT spec)
+            has_int_class = any(f"_{cls}_" in f"_{fname}_" for cls in CLOTH_CLASSES | {"druid", "shaman", "evoker", "monk"})  # Classes that can have INT specs
+            has_int_spec = any(f"_{spec}_" in f"_{fname}_" for spec in INT_SPECS)
+            if has_int_class and has_int_spec:
+                matches_stat = True
+        
+        if "agi" in comment:
+            # Check if this character is an AGI character
+            has_agi_class = any(f"_{cls}_" in f"_{fname}_" for cls in LEATHER_CLASSES | MAIL_CLASSES | {"druid"})
+            has_agi_spec = any(f"_{spec}_" in f"_{fname}_" for spec in AGI_SPECS)
+            if has_agi_class and has_agi_spec:
+                matches_stat = True
+        
+        if "str" in comment:
+            # Check if this character is a STR character
+            has_str_class = any(f"_{cls}_" in f"_{fname}_" for cls in PLATE_CLASSES)
+            has_str_spec = any(f"_{spec}_" in f"_{fname}_" for spec in STR_SPECS)
+            if has_str_class and has_str_spec:
+                matches_stat = True
+        
+        if not matches_stat:
             return False
-    if "agi" in comment:
-        if not any(f"_{spec}_" in f"_{fname}_" for spec in AGI_SPECS):
-            return False
-    if "str" in comment:
-        if not any(f"_{spec}_" in f"_{fname}_" for spec in STR_SPECS):
-            return False
+    
     return True
 
 def format_copy_line(filename, comment):
@@ -106,7 +128,7 @@ def append_to_simc_files(txt_file, folder="simc_inputs"):
                     to_append.append(f"{copy_line}{line}")
             if to_append:
                 with open(filepath, "w", encoding="utf-8") as simc_file:
-                    simc_file.write(content + "\n".join(to_append) + "\n")
+                    simc_file.write(content + whitespace + "\n".join(to_append) + "\n")
                 print(f"Appended to: {filepath}")
 
 def append_tier_set_bonuses(folder="simc_inputs"):

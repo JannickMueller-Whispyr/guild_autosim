@@ -23,7 +23,7 @@ def eprint(*args, **kwargs):
 
 parser = argparse.ArgumentParser()
 parser.add_argument("input_file", nargs="?", help="Path to .simc file")
-parser.add_argument("--simc_version", default="nightly")
+parser.add_argument("--simc_version", default="latest")
 parser.add_argument("--batch", action="store_true", help="Run all .simc files in simc_inputs folder")
 args = parser.parse_args()
 
@@ -31,7 +31,7 @@ HOST = 'https://www.raidbots.com'
 
 SIM_SUBMIT_URL = "%s/sim" % HOST
 
-def run_simc_file(input_file, simc_version="nightly"):
+def run_simc_file(input_file, simc_version="latest"):
     with open(input_file, 'r', encoding='utf-8') as simc_file:
         simc_input = simc_file.read()
     api_key = get_api_key()
