@@ -10,7 +10,7 @@ PLATE_CLASSES = {"warrior", "paladin", "deathknight"}
 INT_SPECS = {
     "arcane", "fire", "frost", "balance", "restoration", "discipline", "holy", "shadow",
     "elemental", "affliction", "demonology", "destruction", "mistweaver",
-    "devastation", "preservation", "augmentation"
+    "devastation", "preservation", "augmentation", "devourer"
 }
 AGI_SPECS = {
     "assassination", "outlaw", "subtlety", "feral", "guardian", "windwalker",
@@ -25,7 +25,7 @@ HERO_TALENTS = {
     "dark_ranger", "pack_leader", "sentinel", "frostfire", "spellslinger", "sunfury", "conduit_of_the_celestials",
     "master_of_harmony", "shadopan", "herald_of_the_sun", "lightsmith", "templar", "archon", "oracle", "voidweaver",
     "deathstalker", "fatebound", "trickster", "farseer", "stormbringer", "totemic", "diabolist", "hellcaller",
-    "soul_harvester", "colossus", "mountain_thane", "slayer"
+    "soul_harvester", "colossus", "mountain_thane", "slayer", "annihilator"
 }
 
 def parse_append_file(txt_file):
@@ -67,7 +67,7 @@ def should_append(filename, comment):
         # Check if this specific filename matches the stat requirement
         if "int" in comment:
             # Check if this character is an INT character (has INT class AND INT spec)
-            has_int_class = any(f"_{cls}_" in f"_{fname}_" for cls in CLOTH_CLASSES | {"druid", "shaman", "evoker", "monk"})  # Classes that can have INT specs
+            has_int_class = any(f"_{cls}_" in f"_{fname}_" for cls in CLOTH_CLASSES | {"druid", "shaman", "evoker", "monk", "demonhunter"})  # Classes that can have INT specs
             has_int_spec = any(f"_{spec}_" in f"_{fname}_" for spec in INT_SPECS)
             if has_int_class and has_int_spec:
                 matches_stat = True
@@ -153,15 +153,15 @@ def append_tier_set_bonuses(folder="simc_inputs"):
                 hero_talent = "unknown"
             blocks = []
             # 2+2
-            blocks.append(f"profileset.\"{base_filename}_2pc\"+=set_bonus=thewarwithin_season_2_2pc=1")
-            blocks.append(f"profileset.\"{base_filename}_2pc\"+=set_bonus+=/thewarwithin_season_2_4pc=0")
-            blocks.append(f"profileset.\"{base_filename}_2pc\"+=set_bonus+=/name=thewarwithin_season_3,pc=2,hero_tree={hero_talent},enable=1")
-            blocks.append(f"profileset.\"{base_filename}_2pc\"+=set_bonus+=/name=thewarwithin_season_3,pc=4,hero_tree={hero_talent},enable=0")
+            blocks.append(f"profileset.\"{base_filename}_2pc\"+=set_bonus=midnight_season_1_2pc=1")
+            blocks.append(f"profileset.\"{base_filename}_2pc\"+=set_bonus+=/midnight_season_1_4pc=0")
+            blocks.append(f"profileset.\"{base_filename}_2pc\"+=set_bonus+=/name=midnight_season_1,pc=2,hero_tree={hero_talent},enable=1")
+            blocks.append(f"profileset.\"{base_filename}_2pc\"+=set_bonus+=/name=midnight_season_1,pc=4,hero_tree={hero_talent},enable=0")
             # 4pc
-            blocks.append(f"profileset.\"{base_filename}_4pc\"+=set_bonus=thewarwithin_season_2_2pc=0")
-            blocks.append(f"profileset.\"{base_filename}_4pc\"+=set_bonus+=/thewarwithin_season_2_4pc=0")
-            blocks.append(f"profileset.\"{base_filename}_4pc\"+=set_bonus+=/name=thewarwithin_season_3,pc=2,hero_tree={hero_talent},enable=1")
-            blocks.append(f"profileset.\"{base_filename}_4pc\"+=set_bonus+=/name=thewarwithin_season_3,pc=4,hero_tree={hero_talent},enable=1")
+            blocks.append(f"profileset.\"{base_filename}_4pc\"+=set_bonus=midnight_season_1_2pc=0")
+            blocks.append(f"profileset.\"{base_filename}_4pc\"+=set_bonus+=/midnight_season_1_4pc=0")
+            blocks.append(f"profileset.\"{base_filename}_4pc\"+=set_bonus+=/name=midnight_season_1,pc=2,hero_tree={hero_talent},enable=1")
+            blocks.append(f"profileset.\"{base_filename}_4pc\"+=set_bonus+=/name=midnight_season_1,pc=4,hero_tree={hero_talent},enable=1")
             set_bonus_block = "\n".join(blocks)
             with open(filepath, "w", encoding="utf-8") as simc_file:
                 simc_file.write(content + whitespace + set_bonus_block + "\n")
