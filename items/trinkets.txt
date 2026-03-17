@@ -20,19 +20,19 @@ trinket1=light_company_guidon,id=249344,ilevel=289
 trinket1=rangercaptains_iridescent_insignia,id=249345,ilevel=289
 
 # Int trinket1 shadow_of_the_empyrean_requiem
-trinket1=shadow_of_the_empyrean_requiem,id=249810
+trinket1=shadow_of_the_empyrean_requiem,id=249810,ilevel=289
 
 # Int trinket1 litany_of_lightblind_wrath
-trinket1=litany_of_lightblind_wrath,id=249808
+trinket1=litany_of_lightblind_wrath,id=249808,ilevel=289
 
 # Int trinket1 locuswalkers_ribbon
-trinket1=locuswalkers_ribbon,id=249809
+trinket1=locuswalkers_ribbon,id=249809,ilevel=289
 
 # Int trinket1 vaelgors_final_stare
-trinket1=vaelgors_final_stare,id=249346
+trinket1=vaelgors_final_stare,id=249346,ilevel=289
 
 # Int trinket1 wraps_of_cosmic_madness
-trinket1=wraps_of_cosmic_madness,id=249340
+trinket1=wraps_of_cosmic_madness,id=249340,ilevel=289
 
 # Agi Str trinket2 undreamt_gods_oozing_vestige
 trinket2=undreamt_gods_oozing_vestige,id=249805,ilevel=289
@@ -56,16 +56,16 @@ trinket2=light_company_guidon,id=249344,ilevel=289
 trinket2=rangercaptains_iridescent_insignia,id=249345,ilevel=289
 
 # Int trinket2 shadow_of_the_empyrean_requiem
-trinket2=shadow_of_the_empyrean_requiem,id=249810
+trinket2=shadow_of_the_empyrean_requiem,id=249810,ilevel=289
 
 # Int trinket2 litany_of_lightblind_wrath
-trinket2=litany_of_lightblind_wrath,id=249808
+trinket2=litany_of_lightblind_wrath,id=249808,ilevel=289
 
 # Int trinket2 locuswalkers_ribbon
-trinket2=locuswalkers_ribbon,id=249809
+trinket2=locuswalkers_ribbon,id=249809,ilevel=289
 
 # Int trinket2 vaelgors_final_stare
-trinket2=vaelgors_final_stare,id=249346
+trinket2=vaelgors_final_stare,id=249346,ilevel=289
 
 # Int trinket2 wraps_of_cosmic_madness
-trinket2=wraps_of_cosmic_madness,id=249340
+trinket2=wraps_of_cosmic_madness,id=249340,ilevel=289

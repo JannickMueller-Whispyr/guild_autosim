@@ -155,13 +155,9 @@ def append_tier_set_bonuses(folder="simc_inputs"):
             # 2+2
             blocks.append(f"profileset.\"{base_filename}_2pc\"+=set_bonus=midnight_season_1_2pc=1")
             blocks.append(f"profileset.\"{base_filename}_2pc\"+=set_bonus+=/midnight_season_1_4pc=0")
-            blocks.append(f"profileset.\"{base_filename}_2pc\"+=set_bonus+=/name=midnight_season_1,pc=2,hero_tree={hero_talent},enable=1")
-            blocks.append(f"profileset.\"{base_filename}_2pc\"+=set_bonus+=/name=midnight_season_1,pc=4,hero_tree={hero_talent},enable=0")
             # 4pc
-            blocks.append(f"profileset.\"{base_filename}_4pc\"+=set_bonus=midnight_season_1_2pc=0")
-            blocks.append(f"profileset.\"{base_filename}_4pc\"+=set_bonus+=/midnight_season_1_4pc=0")
-            blocks.append(f"profileset.\"{base_filename}_4pc\"+=set_bonus+=/name=midnight_season_1,pc=2,hero_tree={hero_talent},enable=1")
-            blocks.append(f"profileset.\"{base_filename}_4pc\"+=set_bonus+=/name=midnight_season_1,pc=4,hero_tree={hero_talent},enable=1")
+            blocks.append(f"profileset.\"{base_filename}_4pc\"+=set_bonus=midnight_season_1_2pc=1")
+            blocks.append(f"profileset.\"{base_filename}_4pc\"+=set_bonus+=/midnight_season_1_4pc=1")
             set_bonus_block = "\n".join(blocks)
             with open(filepath, "w", encoding="utf-8") as simc_file:
                 simc_file.write(content + whitespace + set_bonus_block + "\n")
@@ -171,10 +167,15 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("input_txt", nargs="?", help="Input .txt file to append")
     parser.add_argument("--tier", action="store_true", help="Append tier set bonuses instead of input file")
+    parser.add_argument("--trinket", action="store_true", help="Append trinket bonuses instead of input file")
     args = parser.parse_args()
+
+    TRINKET_FILE = ".\\items\\trinkets.txt"  # Define the trinket input file path
 
     if args.tier:
         append_tier_set_bonuses()
+    elif args.trinket:
+        append_to_simc_files(TRINKET_FILE)
     elif args.input_txt:
         append_to_simc_files(args.input_txt)
     else:

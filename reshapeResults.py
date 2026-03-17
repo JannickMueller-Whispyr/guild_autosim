@@ -6,7 +6,7 @@ from collections import defaultdict
 INT_SPECS = {
     "arcane", "fire", "frost", "discipline", "holy", "shadow", "affliction", 
     "demonology", "destruction", "balance", "restoration", "devastation", 
-    "preservation", "augmentation", "elemental", "enhancement"
+    "preservation", "augmentation", "elemental", "enhancement", "devourer"
 }
 AGI_SPECS = {
     "assassination", "outlaw", "subtlety", "feral", "guardian", "windwalker",
