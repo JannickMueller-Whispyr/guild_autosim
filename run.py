@@ -2,6 +2,12 @@ import subprocess
 import argparse
 import sys
 
+## This script orchestrates the entire simulation pipeline by running each step in sequence.
+## It also accepts command-line arguments to control which steps to run and which input files to use
+## Usage examples:
+##      python run.py report_ids.txt --trinket  # Run with trinket bonuses instead of tier set bonuses
+##      python run.py report_ids.txt             # Run with tier set bonuses (default)
+
 def main():
     parser = argparse.ArgumentParser(description="Run the simulation pipeline.")
     # The txt_file argument is optional and defaults to "report_ids.txt"
